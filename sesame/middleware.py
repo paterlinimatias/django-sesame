@@ -40,8 +40,8 @@ class AuthenticationMiddleware:
             # requests. We can get rid of the token in the URL by redirecting
             # to the same URL with the token removed. We only do this for GET
             # requests because redirecting POST requests doesn't work well.
-            if hasattr(request, 'user') and request.method == 'GET':
-                return self.get_redirect(request)
+            #if hasattr(request, 'user') and request.method == 'GET':
+               # return self.get_redirect(request)
 
         # If the authentication middleware isn't enabled, set request.user.
         # (This attribute is overwritten by the authentication middleware
