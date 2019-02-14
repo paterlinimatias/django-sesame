@@ -63,7 +63,7 @@ class UrlAuthBackendMixin(object):
         # to minimize the length of the token. (Remember, if an attacker
         # obtains the URL, he can already log in. This isn't high security.)
         h = crypto.pbkdf2(
-            user.password, self.salt, self.iterations, digest=self.digest)
+            user.email, self.salt, self.iterations, digest=self.digest)
         return self.sign(struct.pack(str('!i'), user.pk) + h)
 
     def parse_token(self, token):
@@ -84,7 +84,7 @@ class UrlAuthBackendMixin(object):
             logger.debug("Unknown token: %s", token)
             return
         h = crypto.pbkdf2(
-            user.password, self.salt, self.iterations, digest=self.digest)
+            user.email, self.salt, self.iterations, digest=self.digest)
         if not crypto.constant_time_compare(data[4:], h):
             logger.debug("Invalid token: %s", token)
             return
